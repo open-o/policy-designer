@@ -41,9 +41,6 @@ import org.slf4j.LoggerFactory;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 
-
-
-
 public class DesignerApp extends Application<DesignerAppConfiguration> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DesignerApp.class);
@@ -61,30 +58,16 @@ public class DesignerApp extends Application<DesignerAppConfiguration> {
   @Override
   public void initialize(Bootstrap<DesignerAppConfiguration> bootstrap) {
     bootstrap.addBundle(new AssetsBundle("/api-doc", "/api-doc", "index.html", "api-doc"));
-    // initDb(bootstrap);
   }
-
-  // private void initDb(Bootstrap<DesignerAppConfiguration> bootstrap) {
-  // bootstrap.addBundle(bundle);
-  // bootstrap.addBundle(new MigrationsBundle<DesignerAppConfiguration>() {
-  // @Override
-  // public DataSourceFactory getDataSourceFactory(DesignerAppConfiguration configuration) {
-  // return configuration.getDataSourceFactory();
-  // }
-  // });
-  // }
 
   @Override
   public void run(DesignerAppConfiguration configuration, Environment environment) {
     LOGGER.info("Start to initialize policy designer.");
     MsbAddrConfig.setMsbAddress(configuration.getMsbServerAddr());
-    //initDao();
     final ConsoleHealthCheck healthCheck = new ConsoleHealthCheck(configuration.getTemplate());
     environment.healthChecks().register("template", healthCheck);
 
     environment.jersey().register(new DesignerServerResource());
-    // environment.jersey().register(new VNFHostImageResource());
-    // environment.jersey().register(new VNFSoftwareVersionResource());
 
     // register rest interface
     environment.jersey().packages("org.openo.policy.designer.resources");

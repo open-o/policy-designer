@@ -1,6 +1,5 @@
-#!/bin/sh
 #
-# Copyright 2016 ZTE Corporation.
+# Copyright 2017 ZTE Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +14,19 @@
 # limitations under the License.
 #
 
+DIRNAME=`dirname $0`
+RUNHOME=`cd $DIRNAME/; pwd`
+echo @RUNHOME@ $RUNHOME
 
-Main_JAR=modeldesign.jar
-APP_INFO="model-design"
-httpPort=8202
+echo "### Starting policy designer";
+cd policydesigner
+$RUNHOME/policydesigner/bin/stop.sh &
+cd $RUNHOME
+
+
+echo "\n\n### Starting http server"
+cd ./tomcat
+export CATALINA_HOME=$RUNHOME/tomcat
+export CATALINA_BASE=$RUNHOME/tomcat
+$RUNHOME/tomcat/bin/shutdown.sh &
+echo "### Starting policy designer end...";

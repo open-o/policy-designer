@@ -1,5 +1,5 @@
 @REM
-@REM Copyright 2016 ZTE Corporation.
+@REM Copyright 2017 ZTE Corporation.
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -14,15 +14,17 @@
 @REM limitations under the License.
 @REM
 
-echo #jcmd# %1
-echo #RUNHOME# %3
-echo #Main_JAR# %2
+@echo off
+title policydesigner
 
-echo %1 | findstr %2 | findstr %3>NUL
-echo ERRORLEVEL=%ERRORLEVEL%
-IF ERRORLEVEL 1 goto findend
-for /f "tokens=1" %%a in (%1) do (  
-    echo kill %1
-	taskkill /F /pid %%a
-)
-:findend
+set RUNHOME=%~dp0
+echo ##RUNHOME %RUNHOME%
+
+
+echo ### Starting policydesigner
+start /D %RUNHOME%policydesigner bin\run.bat
+set CATALINA_HOME=%RUNHOME%tomcat
+set CATALINA_BASE=%RUNHOME%tomcat
+echo ### Starting tomcat
+start /D %RUNHOME%tomcat bin\startup.bat 
+

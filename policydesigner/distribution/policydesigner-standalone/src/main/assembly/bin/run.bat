@@ -1,5 +1,5 @@
 @REM
-@REM Copyright 2016 ZTE Corporation.
+@REM Copyright 2017 ZTE Corporation.
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -15,22 +15,22 @@
 @REM
 
 @echo off
-title catalog-service
+title policydesigner-service
 
 set RUNHOME=%~dp0
 echo ### RUNHOME: %RUNHOME%
-echo ### Starting catalog-service
+echo ### Starting policydesigner-service
 set main_path=%RUNHOME%..\
 cd /d %main_path%
 set JAVA="%JAVA_HOME%\bin\java.exe"
 set port=8312
 set jvm_opts=-Xms50m -Xmx128m
 rem set jvm_opts=%jvm_opts% -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=%port%,server=y,suspend=n
-set class_path=%main_path%;%main_path%catalog-service.jar
+set class_path=%main_path%;%main_path%designer-service.jar
 echo ### jvm_opts: %jvm_opts%
 echo ### class_path: %class_path%
 
-%JAVA% -classpath %class_path% %jvm_opts% org.openo.commontosca.catalog.CatalogApp server %main_path%conf/catalog.yml
+%JAVA% -classpath %class_path% %jvm_opts% org.openo.policy.designer.DesignerApp server %main_path%conf/policydesigner.yml
 
 IF ERRORLEVEL 1 goto showerror
 exit

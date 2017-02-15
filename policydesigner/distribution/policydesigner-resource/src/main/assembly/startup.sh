@@ -1,5 +1,5 @@
 #
-# Copyright 2016 ZTE Corporation.
+# Copyright 2017 ZTE Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,24 @@
 # limitations under the License.
 #
 
-serviceIp: 
-msbServerAddr: http://127.0.0.1:80
-autoRegister: true
-path: /openoapi
+
+DIRNAME=`dirname $0`
+RUNHOME=`cd $DIRNAME/; pwd`
+echo @RUNHOME@ $RUNHOME
+
+echo "### Starting policydesigner";
+cd policydesigner
+$RUNHOME/policydesigner/bin/run.sh &
+cd $RUNHOME
+
+
+echo "\n\n### http server"
+cd ./tomcat
+if [ ! -d "$RUNHOME/tomcat/logs" ]; then
+  mkdir $RUNHOME/tomcat/logs
+fi
+export CATALINA_HOME=$RUNHOME/tomcat
+export CATALINA_BASE=$RUNHOME/tomcat
+$RUNHOME/tomcat/bin/startup.sh &
+echo "### Starting policydesigner end...";
+

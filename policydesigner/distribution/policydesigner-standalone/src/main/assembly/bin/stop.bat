@@ -1,5 +1,5 @@
 @REM
-@REM Copyright 2016 ZTE Corporation.
+@REM Copyright 2017 ZTE Corporation.
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -15,17 +15,17 @@
 @REM
 
 @echo off
-title stopping catalog-service
+title stopping policydesigner-service
 
 set HOME=%~dp0
-set Main_Class="org.openo.commontosca.catalog.CatalogApp"
+set Main_Class="org.openo.policy.designer.DesignerApp"
 
-echo ================== catalog-service info =============================================
+echo ================== policydesigner-service info =============================================
 echo HOME=$HOME
 echo Main_Class=%Main_Class%
 echo ===============================================================================
 
-echo ### Stopping catalog-service
+echo ### Stopping policydesigner-service
 cd /d %HOME%
 
 for /f "delims=" %%i in ('"%JAVA_HOME%\bin\jcmd"') do (

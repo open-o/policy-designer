@@ -1,5 +1,5 @@
 #
-# Copyright 2016 ZTE Corporation.
+# Copyright 2017 ZTE Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,12 +29,12 @@ httpServerPath: ../tomcat/webapps/ROOT/
 
 server:
   type: simple
-  rootPath: '/openoapi/policydesigner/v1/*'
+  rootPath: '/openoapi/poldesigner/v1/*'
   applicationContextPath: /
   adminContextPath: /admin
   connector:
     type: http
-    port: 8203
+    port: 8901
 
 # Logging settings.
 logging:

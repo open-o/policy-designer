@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2016 ZTE Corporation.
+# Copyright 2017 ZTE Corporation.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 
 DIRNAME=`dirname $0`
 HOME=`cd $DIRNAME/; pwd`
-Main_Class="org.openo.commontosca.catalog.CatalogApp"
+Main_Class="org.openo.policy.designer.DesignerApp"
 
-echo ================== catalog-service info =============================================
+echo ================== policydesigner-service info =============================================
 echo HOME=$HOME
 echo Main_Class=$Main_Class
 echo ===============================================================================

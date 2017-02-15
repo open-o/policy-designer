@@ -32,26 +32,18 @@ public class DesignerAppConfiguration extends Configuration {
 
   @NotEmpty
   private String msbServerAddr;
+  
+  @NotEmpty
+  private String httpServerAddr;
 
   @NotEmpty
   private String designerPath;
+  
+  @NotEmpty
+  private String httpServerPath;
 
   @Valid
   private String serviceIp;
-  
-  @Valid
-  @NotNull
-  private DataSourceFactory database = new DataSourceFactory();
-
-  @JsonProperty("database")
-  public DataSourceFactory getDataSourceFactory() {
-    return database;
-  }
-
-  @JsonProperty("database")
-  public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
-    this.database = dataSourceFactory;
-  }
 
   @JsonProperty
   public String getTemplate() {
@@ -103,4 +95,24 @@ public class DesignerAppConfiguration extends Configuration {
     this.serviceIp = serviceIp;
   }
 
+
+  @JsonProperty
+  public String getHttpServerPath() {
+    return httpServerPath;
+  }
+
+  @JsonProperty
+  public void setHttpServerPath(String httpServerPath) {
+    this.httpServerPath = httpServerPath;
+  }
+  
+  @JsonProperty
+  public String getHttpServerAddr() {
+    return httpServerAddr;
+  }
+
+  @JsonProperty
+  public void setHttpServerAddr(String httpServerAddr) {
+    this.httpServerAddr = httpServerAddr;
+  }
 }

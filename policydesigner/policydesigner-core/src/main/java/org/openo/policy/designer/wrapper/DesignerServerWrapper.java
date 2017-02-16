@@ -44,6 +44,6 @@ public class DesignerServerWrapper {
   public Response queryTest() {
     HelloWorld test = new HelloWorld();
     test.setTest("HelloWorld");
-    return Response.ok(test).build();
+    return Response.ok(test.getTest()).build();
   }
 }

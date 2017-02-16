@@ -26,10 +26,8 @@ import io.dropwizard.setup.Environment;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 
-import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.openo.policy.designer.common.Config;
-import org.openo.policy.designer.common.MsbAddrConfig;
 import org.openo.policy.designer.common.ServiceRegistrer;
 
 import org.openo.policy.designer.health.ConsoleHealthCheck;
@@ -38,8 +36,6 @@ import org.openo.policy.designer.resources.DesignerServerResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.EnumSet;
-import javax.servlet.DispatcherType;
 
 public class DesignerApp extends Application<DesignerAppConfiguration> {
 
@@ -63,7 +59,7 @@ public class DesignerApp extends Application<DesignerAppConfiguration> {
   @Override
   public void run(DesignerAppConfiguration configuration, Environment environment) {
     LOGGER.info("Start to initialize policy designer.");
-    MsbAddrConfig.setMsbAddress(configuration.getMsbServerAddr());
+//    MsbAddrConfig.setMsbAddress(configuration.getMsbServerAddr());
     final ConsoleHealthCheck healthCheck = new ConsoleHealthCheck(configuration.getTemplate());
     environment.healthChecks().register("template", healthCheck);
 

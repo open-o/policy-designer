@@ -47,18 +47,4 @@ public class MicroserviceBusConsumer {
     return true;
   }
 
-  public static ApiRouteInfo queryApiRouteInfo(String serviceName, String version) {
-    ClientConfig config = new ClientConfig();
-    LOG.info("microservice register body:" + "serviceName:" + serviceName + " version:" + version);
-    ApiRouteInfo apiRouteInfo = null;
-    try {
-      MicroserviceBusRest resourceserviceproxy = ConsumerFactory.createConsumer(
-          Config.getConfigration().getMsbServerAddr(), config, MicroserviceBusRest.class);
-      apiRouteInfo = resourceserviceproxy.queryApiRouteInfo(serviceName, version);
-    } catch (Exception e1) {
-      LOG.error("query api route failed!" + e1.getMessage());
-
-    }
-    return apiRouteInfo;
-  }
 }

@@ -34,11 +34,4 @@ public interface MicroserviceBusRest {
   @Produces(MediaType.APPLICATION_JSON)
   public ServiceRegisterEntity registerServce(@QueryParam("createOrUpdate") String createOrUpdate,
       ServiceRegisterEntity entity) throws Exception;
-
-  @Path("")
-  @GET
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public ApiRouteInfo queryApiRouteInfo(@PathParam("serviceName") String serviceName,
-      @PathParam("version") String version ) throws Exception;
 }

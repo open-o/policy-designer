@@ -38,9 +38,6 @@ public class ToolUtil {
    * @return String
    */
   public static String objectToString(Object obj) {
-    if (obj == null) {
-      return "";
-    }
     Gson gson = new Gson();
     String str = gson.toJson(obj);
     return str;

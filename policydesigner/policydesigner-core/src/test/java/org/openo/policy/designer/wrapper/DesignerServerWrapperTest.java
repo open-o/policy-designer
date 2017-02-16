@@ -22,11 +22,13 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openo.policy.designer.DesignerApp;
 import org.openo.policy.designer.DesignerAppConfiguration;
 import org.openo.policy.designer.common.Config;
-import org.openo.policy.designer.common.MsbAddrConfig;
 import org.openo.policy.designer.common.ServiceRegistrer;
+import org.openo.policy.designer.common.ToolUtil;
 import org.openo.policy.designer.entity.HelloWorld;
+import org.openo.policy.designer.externalservice.msb.MicroserviceBusConsumer;
 import org.openo.policy.designer.externalservice.msb.ServiceRegisterEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +40,6 @@ public class DesignerServerWrapperTest {
   private static final Logger LOG = LoggerFactory.getLogger(ServiceRegistrer.class);
   
   static {
-    MsbAddrConfig.setMsbAddress("http://10.74.44.28:80");
     
     DesignerAppConfiguration configuration = new DesignerAppConfiguration();
     Config.setConfigration(configuration);
@@ -81,6 +82,13 @@ public class DesignerServerWrapperTest {
 //    flag = MicroserviceBusConsumer.registerService(entity);
 //    assertEquals(true, flag);
     Thread registerPolDesignerService = new Thread(new ServiceRegistrer());
+  }
+  
+  @Test
+  public void testMicroserviceBusConsumer() {
+    ServiceRegisterEntity entity = new ServiceRegisterEntity();
+    entity = initServiceEntity();
+    boolean flag = MicroserviceBusConsumer.registerService(entity);
   }
 
   /**

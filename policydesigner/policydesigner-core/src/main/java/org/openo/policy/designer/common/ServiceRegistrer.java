@@ -43,12 +43,8 @@ public class ServiceRegistrer implements Runnable {
       Iterator<ServiceRegisterEntity> it = serviceEntityList.iterator();
       while (it.hasNext()) {
         entity = it.next();
-        LOG.info("start" + entity.getServiceName() + " catalog microservice register.retry:"
-            + retry);
         flag = MicroserviceBusConsumer.registerService(entity);
         if (flag == false) {
-          LOG.warn(entity.getServiceName()
-              + " microservice register failed, sleep 30S and try again.");
           threadSleep(30000);
         } else {
           LOG.info(entity.getServiceName() + " microservice register success!");
@@ -58,7 +54,7 @@ public class ServiceRegistrer implements Runnable {
       retry++;
 
     }
-    LOG.info("catalog microservice register end.");
+    LOG.info("policy designer microservice register end.");
 
   }
 
@@ -67,31 +63,21 @@ public class ServiceRegistrer implements Runnable {
    * @param second sleep second
    */
   private void threadSleep(int seconds) {
-    LOG.info("start sleep ....");
     try {
       Thread.sleep(seconds);
     } catch (InterruptedException e1) {
       LOG.error("thread sleep error.errorMsg:" + e1.getMessage());
     }
-    LOG.info("sleep end .");
   }
 
   private void initServiceEntity() {
-    ServiceRegisterEntity catalogEntity = new ServiceRegisterEntity();
-    catalogEntity.setServiceName("catalog");
-    catalogEntity.setProtocol("REST");
-    catalogEntity.setVersion("v1");
-    catalogEntity.setUrl("/openoapi/catalog/v1");
-    catalogEntity.setSingleNode(Config.getConfigration().getServiceIp(), "8200", 0);
-    catalogEntity.setVisualRange("1");
-    serviceEntityList.add(catalogEntity);
-    ServiceRegisterEntity httpServiceEntity = new ServiceRegisterEntity();
-    httpServiceEntity.setServiceName("/files/catalog-http");
-    httpServiceEntity.setProtocol("REST");
-    httpServiceEntity.setVersion("v1");
-    httpServiceEntity.setUrl("/");
-    httpServiceEntity.setSingleNode(Config.getConfigration().getServiceIp(), "8201", 0);
-    httpServiceEntity.setVisualRange("1");
-    serviceEntityList.add(httpServiceEntity);
+    ServiceRegisterEntity polDesignerEntity = new ServiceRegisterEntity();
+    polDesignerEntity.setServiceName("poldesigner");
+    polDesignerEntity.setProtocol("REST");
+    polDesignerEntity.setVersion("v1");
+    polDesignerEntity.setUrl("/openoapi/poldesigner/v1");
+    polDesignerEntity.setSingleNode(Config.getConfigration().getServiceIp(), "8901", 0);
+    polDesignerEntity.setVisualRange("1");
+    serviceEntityList.add(polDesignerEntity);
   }
 }

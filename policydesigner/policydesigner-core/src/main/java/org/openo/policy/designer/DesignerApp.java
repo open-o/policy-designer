@@ -108,9 +108,9 @@ public class DesignerApp extends Application<DesignerAppConfiguration> {
   }
 
   private void initService() {
-    Thread registerCatalogService = new Thread(new ServiceRegistrer());
-    registerCatalogService.setName("register policy designer service to Microservice Bus");
-    registerCatalogService.start();
+    Thread registerPolDesignerService = new Thread(new ServiceRegistrer());
+    registerPolDesignerService.setName("register policy designer service to Microservice Bus");
+    registerPolDesignerService.start();
   }
 
 }

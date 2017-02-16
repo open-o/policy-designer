@@ -25,21 +25,26 @@ import org.junit.Test;
 import org.openo.policy.designer.DesignerAppConfiguration;
 import org.openo.policy.designer.common.Config;
 import org.openo.policy.designer.common.MsbAddrConfig;
+import org.openo.policy.designer.common.ServiceRegistrer;
 import org.openo.policy.designer.entity.HelloWorld;
+import org.openo.policy.designer.externalservice.msb.ServiceRegisterEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 
 public class DesignerServerWrapperTest {
   private static String resourcePath;
+  private static final Logger LOG = LoggerFactory.getLogger(ServiceRegistrer.class);
   
   static {
     MsbAddrConfig.setMsbAddress("http://10.74.44.28:80");
     
     DesignerAppConfiguration configuration = new DesignerAppConfiguration();
     Config.setConfigration(configuration);
+    Config.getConfigration().setMsbServerAddr("http://127.0.0.1:80");
   }
   
-
 
   /**
    * startup db session before class.
@@ -67,6 +72,16 @@ public class DesignerServerWrapperTest {
     Response result = DesignerServerWrapper.getInstance().queryTest();
     assertEquals(200, result.getStatus());
   }
+  
+  @Test
+  public void testMsbRegister() {
+//    boolean flag = false;
+//    ServiceRegisterEntity entity = new ServiceRegisterEntity();
+//    entity = initServiceEntity();
+//    flag = MicroserviceBusConsumer.registerService(entity);
+//    assertEquals(true, flag);
+    Thread registerPolDesignerService = new Thread(new ServiceRegistrer());
+  }
 
   /**
    * delete data after test.
@@ -84,5 +99,16 @@ public class DesignerServerWrapperTest {
   @AfterClass
   public static void tearDownAfterClass() {
 
+  }
+  
+  private ServiceRegisterEntity initServiceEntity() {
+    ServiceRegisterEntity polDesignerEntity = new ServiceRegisterEntity();
+    polDesignerEntity.setServiceName("poldesigner");
+    polDesignerEntity.setProtocol("REST");
+    polDesignerEntity.setVersion("v1");
+    polDesignerEntity.setUrl("/openoapi/poldesigner/v1");
+    polDesignerEntity.setSingleNode(Config.getConfigration().getServiceIp(), "8901", 0);
+    polDesignerEntity.setVisualRange("1");
+    return polDesignerEntity;
   }
 }
